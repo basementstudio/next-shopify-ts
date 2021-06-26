@@ -1,10 +1,16 @@
 import Client from 'shopify-buy'
 import { Product } from 'ts/models'
 
-export const client = Client.buildClient({
-  domain: process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN as string,
-  storefrontAccessToken: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN as string
-})
+const domain = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN
+const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
+
+if (typeof domain !== 'string' || typeof storefrontAccessToken !== 'string') {
+  throw new Error(
+    `domain (${domain}) and storefrontAccessToken (${storefrontAccessToken}) must be strings`
+  )
+}
+
+export const client = Client.buildClient({ domain, storefrontAccessToken })
 
 function formatProduct(shopifyProduct: ShopifyBuy.Product): Product {
   return {
