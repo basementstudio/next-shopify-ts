@@ -25,6 +25,8 @@ type Context = {
 
 const ShopifyContext = createContext<Context | undefined>(undefined)
 
+const getQueryKey = (checkoutId: string | null) => ['checkout', checkoutId]
+
 const ShopifyContextProvider = ({
   children
 }: {
@@ -36,7 +38,7 @@ const ShopifyContextProvider = ({
   const queryClient = useQueryClient()
 
   const queryKey = useMemo(
-    () => ['checkout', localStorageCheckoutId],
+    () => getQueryKey(localStorageCheckoutId),
     [localStorageCheckoutId]
   )
 
@@ -59,6 +61,13 @@ const ShopifyContextProvider = ({
     queryFn: async () => {
       const res = await fetch(`/api/checkout/${localStorageCheckoutId}`)
       const { checkout } = await res.json()
+      const checkoutId = checkout.id.toString()
+      if (checkoutId !== localStorageCheckoutId) {
+        // the checkout was invalid
+        localStorage.setItem('checkout-id', checkoutId)
+        setLocalStorageCheckoutId(checkoutId)
+        queryClient.setQueryData(getQueryKey(checkoutId), checkout)
+      }
       return checkout
     }
   })

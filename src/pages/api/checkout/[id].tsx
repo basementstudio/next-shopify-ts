@@ -13,8 +13,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
       case 'GET': {
-        // Fetch
-        const checkout = await client.checkout.fetch(id)
+        let checkout
+        try {
+          checkout = await client.checkout.fetch(id)
+        } catch (error) {
+          checkout = await client.checkout.create()
+        }
         success(res, { checkout })
         break
       }
