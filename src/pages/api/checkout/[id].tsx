@@ -15,7 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       case 'GET': {
         let checkout
         try {
-          checkout = await client.checkout.fetch(id)
+          checkout =
+            (await client.checkout.fetch(id)) ??
+            (await client.checkout.create())
         } catch (error) {
           checkout = await client.checkout.create()
         }
