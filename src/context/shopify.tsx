@@ -33,8 +33,9 @@ const ShopifyContextProvider = ({
   children?: React.ReactNode
 }) => {
   const cartToggleState = useToggleState()
-  const [localStorageCheckoutId, setLocalStorageCheckoutId] =
-    useState<string | null>(null)
+  const [localStorageCheckoutId, setLocalStorageCheckoutId] = useState<
+    string | null
+  >(null)
   const queryClient = useQueryClient()
 
   const queryKey = useMemo(
