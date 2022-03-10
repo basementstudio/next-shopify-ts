@@ -27,7 +27,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^11.0.1",
     "@types/node": "^15.12.4",
-    "@types/react": "^17.0.6",
+    "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.6",
     "@types/shopify-buy": "^2.10.5",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
