@@ -41,7 +41,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^6.0.0",
+    "husky": "^8.0.1",
     "lint-staged": "^11.0.0",
     "next-compose-plugins": "^2.2.1",
     "next-svgr": "^0.0.2",
